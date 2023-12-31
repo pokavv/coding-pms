@@ -10,7 +10,7 @@
     <form action="/login" method="post">
         <h2>로그인</h2>
         <div>
-            <img src="/images/logo.jpg" class="img-thumbnail" style="height: 200px; width: 200px;" alt="이 글이 보이면 시큐리티 에러">
+            <img src="/images/logo.jpg" class="img-thumbnail" style="height: 200px; width: 200px;" alt="이 글이 보이면 필터 에러">
         <div>
             <input type="text" name="email" placeholder="이메일"/>
         </div>

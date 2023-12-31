@@ -15,8 +15,7 @@ public class UserService {
     private UserMapper userMapper;
 
     public List<UserVo> getUserList() {
-        List<UserVo> userList = userMapper.getUserList();
-        return userList;
+        return userMapper.getUserList();
     }
 
     public Long login(String email, String password) {
@@ -31,13 +30,8 @@ public class UserService {
         userMapper.insertUser(userVo);
     }
 
-    public UserVo getUserByEmail(String email) {
-        return userMapper.getUserByEmail(email);
-    }
-
     public UserVo getUserById(Long id) {
-        UserVo userVo = userMapper.getUserById(id);
-        return userVo;
+        return userMapper.getUserById(id);
     }
 
     public void modifyInfo(UserVo userVo) {
