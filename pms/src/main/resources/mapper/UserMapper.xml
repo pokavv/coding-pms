@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.pms.mapper.UserMapper">
+    <select id="getUserList" resultType="com.dev.pms.domain.UserVo">
+        select *
+        from user_table
+    </select>
+
+    <select id="getUserByEmail" resultType="com.dev.pms.domain.UserVo">
+        select *
+        from user_table
+        where email=#{email}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" parameterType="com.dev.pms.domain.UserVo">
+        insert into user_table
+        (name, email, password, phone, website)
+        values
+        (#{name}, #{email}, #{password}, #{phone}, #{website})
+    </insert>
+
+    <select id="getUserById" resultType="com.dev.pms.domain.UserVo">
+        select *
+        from user_table
+        where id=#{id}
+    </select>
+
+    <update id="updateUser" parameterType="com.dev.pms.domain.UserVo">
+        update user_table
+        set name=#{name},
+            email=#{email},
+            password=#{password},
+            phone=#{phone},
+            website=#{website}
+        where id=#{id}
+    </update>
+
+    <delete id="deleteUser">
+        delete
+        from user_table
+        where id=#{id}
+    </delete>
+</mapper>
