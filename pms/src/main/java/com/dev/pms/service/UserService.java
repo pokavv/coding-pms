@@ -1,7 +1,6 @@
 package com.dev.pms.service;
 
 import com.dev.pms.domain.UserVo;
-import com.dev.pms.exception.NoSuchDataException;
 import com.dev.pms.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +16,13 @@ public class UserService {
 
     public List<UserVo> getUserList() {
         List<UserVo> userList = userMapper.getUserList();
-        if (userList.isEmpty()) {
-            throw new NoSuchDataException("NoSuchDataException : no such data exists.");
-        }
         return userList;
     }
 
     public Long login(String email, String password) {
-        Optional<UserVo> userVo = userMapper.getUserByEmail(email);
-        if (userVo.get().getPassword().equals(password)) {
-            return userVo.get().getId();
+        UserVo userVo = userMapper.getUserByEmail(email);
+        if (userVo.getPassword().equals(password)) {
+            return userVo.getId();
         }
         return null;
     }
@@ -35,15 +31,12 @@ public class UserService {
         userMapper.insertUser(userVo);
     }
 
-    public Optional<UserVo> getUserByEmail(String email) {
+    public UserVo getUserByEmail(String email) {
         return userMapper.getUserByEmail(email);
     }
 
     public UserVo getUserById(Long id) {
         UserVo userVo = userMapper.getUserById(id);
-        if (userVo == null) {
-            throw new NoSuchDataException("NoSuchDataException : no such data exists.");
-        }
         return userVo;
     }
 

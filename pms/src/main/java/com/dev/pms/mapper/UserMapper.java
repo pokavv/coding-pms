@@ -11,7 +11,7 @@ public interface UserMapper {
 
     List<UserVo> getUserList();
 
-    Optional<UserVo> getUserByEmail(String email);
+    UserVo getUserByEmail(String email);
 
     void insertUser(UserVo userVo);
 
