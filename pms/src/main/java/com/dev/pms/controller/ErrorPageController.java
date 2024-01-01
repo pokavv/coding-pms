@@ -13,12 +13,12 @@ public class ErrorPageController {
     @RequestMapping("/error/404")
     public String errorPage404(HttpServletRequest request, HttpServletResponse response) {
         log.info("[{}] 404 NOT FOUND", request);
-        return "error/404";
+        return "error-404";
     }
 
     @RequestMapping("/error/500")
     public String errorPage500(HttpServletRequest request, HttpServletResponse response) {
         log.info("[{}] 500 INTERNAL SERVER ERROR", request);
-        return "error/500";
+        return "error-500";
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.pms.mapper.TodoMapper">
+    <select id="getTodoList" resultType="com.dev.pms.domain.TodoVo">
+        select *
+        from todo_table
+        where user_id=#{userId}
+    </select>
+
+    <select id="getTodoById" resultType="com.dev.pms.domain.TodoVo">
+        select *
+        from todo_table
+        where todo_id=#{todoId}
+    </select>
+
+    <insert id="insertTodo" useGeneratedKeys="true" parameterType="com.dev.pms.domain.TodoDto">
+        insert into todo_table
+        (todo_content, todo_date, is_completed)
+        values
+        (#{todoContent, #{todoDate}, default)
+    </insert>
+
+    <update id="completeTodo" parameterType="com.dev.pms.domain.TodoDto">
+        update todo_table
+        set is_completed=#{isCompleted}
+        where todo_id=#{todoId}
+    </update>
+
+    <delete id="deleteTodo">
+        delete
+        from todo_table
+        where todo_id=#{todoId}
+    </delete>
+</mapper>

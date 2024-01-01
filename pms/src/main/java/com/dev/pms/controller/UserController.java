@@ -42,6 +42,7 @@ public class UserController {
     public String login(String email, String password, HttpServletRequest request,
                         @RequestParam(defaultValue = "/", required = false) String redirectURL) {
         Long loginId = userService.login(email, password);
+        String username = userService.getUserById(loginId).getName();
 
         if (loginId == null) {
             log.info("로그인 실패");
@@ -50,7 +51,9 @@ public class UserController {
         log.info("로그인 성공");
         HttpSession session = request.getSession();
         session.setAttribute(SessionConst.LOGIN_USER, loginId);
-        log.info("HttpSession Session Info : {}", session.getAttribute("userId"));
+        session.setAttribute(SessionConst.LOGIN_USER_NAME, username);
+        log.info("HttpSession Session Info : loginId : {}, loginUserName : {}",
+                session.getAttribute(SessionConst.LOGIN_USER), session.getAttribute(SessionConst.LOGIN_USER_NAME));
         return "redirect:" + redirectURL;
     }
 
