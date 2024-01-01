@@ -2,12 +2,15 @@ package com.dev.pms.service;
 
 import com.dev.pms.domain.UserVo;
 import com.dev.pms.mapper.UserMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class UserService {
 
@@ -20,8 +23,9 @@ public class UserService {
 
     public Long login(String email, String password) {
         UserVo userVo = userMapper.getUserByEmail(email);
+        log.info("UserService: userInfo {}", userVo);
         if (userVo.getPassword().equals(password)) {
-            return userVo.getId();
+            return userVo.getUserId();
         }
         return null;
     }
@@ -40,5 +44,9 @@ public class UserService {
 
     public void withdraw(Long id) {
         userMapper.deleteUser(id);
+    }
+
+    public int emailDuplicateCheck(UserVo userVo) {
+        return userMapper.emailDuplicateCheck(userVo);
     }
 }

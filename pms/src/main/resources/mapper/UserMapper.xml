@@ -22,7 +22,7 @@
     <select id="getUserById" resultType="com.dev.pms.domain.UserVo">
         select *
         from user_table
-        where id=#{id}
+        where user_id=#{userId}
     </select>
 
     <update id="updateUser" parameterType="com.dev.pms.domain.UserVo">
@@ -32,12 +32,18 @@
             password=#{password},
             phone=#{phone},
             website=#{website}
-        where id=#{id}
+        where user_id=#{userId}
     </update>
 
     <delete id="deleteUser">
         delete
         from user_table
-        where id=#{id}
+        where user_id=#{userId}
     </delete>
+
+    <select id="emailDuplicateCheck" parameterType="com.dev.pms.domain.UserVo" resultType="int">
+        select count(*)
+        from user_table
+        where email=#{email}
+    </select>
 </mapper>

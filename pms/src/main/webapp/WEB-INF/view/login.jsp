@@ -7,7 +7,7 @@
     <title>로그인</title>
 </head>
 <body>
-    <form action="/login" method="post">
+    <form action="" method="post">
         <h2>로그인</h2>
         <div>
             <img src="/images/logo.jpg" class="img-thumbnail" style="height: 200px; width: 200px;" alt="이 글이 보이면 필터 에러">

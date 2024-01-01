@@ -20,4 +20,6 @@ public interface UserMapper {
     void updateUser(UserVo userVo);
 
     void deleteUser(Long id);
+
+    Integer emailDuplicateCheck(UserVo userVo);
 }

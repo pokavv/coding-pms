@@ -1,0 +1,8 @@
+create table user_table (
+user_id bigint generated always as identity primary key,
+name varchar(10) not null,
+email varchar(50) not null,
+password varchar(20) not null,
+phone varchar(11) not null,
+website varchar(50) not null
+)
