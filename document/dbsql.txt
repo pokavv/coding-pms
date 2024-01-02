@@ -4,5 +4,89 @@ name varchar(10) not null,
 email varchar(50) not null,
 password varchar(20) not null,
 phone varchar(11) not null,
-website varchar(50) not null
+website varchar(50)
 )
+
+create table todo_table (
+todo_id bigint generated always as identity primary key,
+todo_content varchar(100) not null,
+todo_date timestamp not null,
+is_completed boolean not null default 0,
+user_id bigint not null
+)
+
+alter table todo_table
+add foreign key (user_id)
+references user_table (user_id) on delete cascade
+
+create table group_table (
+group_id bigint generated always as identity primary key,
+group_name varchar(20) not null,
+group_description varchar(255) not null,
+group_aim varchar(255) not null,
+created_date timestamp not null,
+is_recruit boolean not null default 0,
+is_completed boolean not null default 0
+)
+
+create table belong_table (
+belong_id bigint generated always as identity primary key,
+user_id bigint not null,
+group_id bigint not null
+)
+
+alter table belong_table
+add foreign key (user_id)
+references user_table (user_id) on delete cascade;
+
+alter table belong_table
+add foreign key (group_id)
+references group_table (group_id) on delete cascade;
+
+create table post_table (
+post_id bigint generated always as identity primary key,
+title varchar(20) not null,
+content varchar(500) not null,
+group_id bigint not null
+)
+
+alter table post_table
+add foreign key (group_id)
+references group_table (group_id) on delete cascade;
+
+create table file_table (
+file_id bigint generated always as identity primary key,
+original_name varchar(255) not null,
+save_name varchar(255) not null,
+file_size bigint not null,
+upload_date timestamp not null,
+post_id bigint not null
+)
+
+alter table file_table
+add foreign key (post_id)
+references post_table (post_id) on delete cascade;
+
+create table comment_table (
+comment_id bigint generated always as identity primary key,
+comment_content varchar(300) not null,
+comment_date timestamp not null,
+post_id bigint not null
+)
+
+alter table comment_table
+add foreign key (post_id)
+references post_table (post_id) on delete cascade;
+
+create table profile_img_table (
+img_id bigint generated always as identity primary key,
+original_name varchar(255) not null,
+save_name varchar(255) not null,
+file_size bigint not null,
+upload_date timestamp not null,
+user_id bigint not null
+)
+
+alter table profile_img_table
+add foreign key (user_id)
+references user_table (user_id) on delete cascade;

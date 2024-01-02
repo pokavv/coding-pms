@@ -17,7 +17,7 @@
         insert into todo_table
         (todo_content, todo_date, is_completed)
         values
-        (#{todoContent, #{todoDate}, default)
+        (#{todoContent}, #{todoDate}, default)
     </insert>
 
     <update id="completeTodo" parameterType="com.dev.pms.domain.TodoDto">

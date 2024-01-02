@@ -15,9 +15,11 @@ public class TodoDto {
 
     public TodoDto() {}
 
-    public TodoDto(String todoContent, LocalDateTime todoDate, Boolean isCompleted) {
+    public TodoDto(String todoContent, LocalDateTime todoDate,
+                   Boolean isCompleted, Long userId) {
         this.todoContent = todoContent;
         this.todoDate = todoDate;
         this.isCompleted = isCompleted;
+        this.userId = userId;
     }
 }
