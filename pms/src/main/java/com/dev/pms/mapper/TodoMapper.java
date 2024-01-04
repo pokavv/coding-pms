@@ -4,10 +4,14 @@ import com.dev.pms.domain.TodoDto;
 import com.dev.pms.domain.TodoVo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface TodoMapper {
 
-    TodoVo getTodoList(Long userId);
+    List<TodoVo> getTodoList(Long userId);
+
+    List<TodoVo> getTodoListIsCompleted(Long userId);
 
     TodoVo getTodoById(Long todoId);
 

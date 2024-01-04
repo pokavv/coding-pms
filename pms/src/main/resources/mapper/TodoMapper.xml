@@ -4,7 +4,13 @@
     <select id="getTodoList" resultType="com.dev.pms.domain.TodoVo">
         select *
         from todo_table
-        where user_id=#{userId}
+        where user_id=#{userId} and is_completed=false
+    </select>
+
+    <select id="getTodoListIsCompleted" resultType="com.dev.pms.domain.TodoVo">
+        select *
+        from todo_table
+        where user_id=#{userId} and is_completed=true
     </select>
 
     <select id="getTodoById" resultType="com.dev.pms.domain.TodoVo">
@@ -22,7 +28,7 @@
 
     <update id="completeTodo" parameterType="com.dev.pms.domain.TodoDto">
         update todo_table
-        set is_completed=#{isCompleted}
+        set is_completed=1
         where todo_id=#{todoId}
     </update>
 
