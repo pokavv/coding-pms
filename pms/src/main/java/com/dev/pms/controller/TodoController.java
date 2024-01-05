@@ -30,8 +30,8 @@ public class TodoController {
         log.info("{}'s todoList init : {}",
                 session.getAttribute(SessionConst.LOGIN_USER_NAME), todo);
 
-        model.addAttribute("todo", todo);
-        log.info("model info: {}", model.getAttribute("todo"));
+        model.addAttribute("todoList", todo);
+        log.info("model info: {}", model.getAttribute("todoList"));
         return todo;
     }
 }
