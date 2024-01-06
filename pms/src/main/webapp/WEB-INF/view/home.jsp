@@ -27,132 +27,75 @@
     </form>
 
     <br class="my-4">
-    <label for="todo_list">TODO 리스트</label>
+    <label for="todo_list" class="home-label">TODO 리스트</label>
     <div id="todo_list" class="todo_list">
-        <c:forEach var="t" items="${todoList}">
-            <tr>
-                <td>${t.todoContent}</td>
-                <td>${t.todoDate}</td>
-            </tr>
-        </c:forEach>
+
     </div>
 
     <br class="my-4">
-    <label for="group_list">참가 그룹</label>
+    <label for="group_list" class="home-label">참가 그룹</label>
     <div id="group_list" class="group_list">
-
     </div>
 
-    <script inline="javascript">
-        /*<![CDATA[*/
+<script>
+    window.onload = () => {
+        todoList();
+        groupList();
+    }
 
-            function hasCode(value) {
-                return ((value.charCodeAt(value.length - 1) - 0xAC00) % 28) > 0;
-            }
-
-            function isValid(target, fieldName, focusTarget) {
-                if (target.value.trim()) {
-                    return true;
+    function todoList() {
+        $.ajax({
+            url: `/todo-list`,
+            type: 'get',
+            dataType: 'json',
+            async: false,
+            success: function (response) {
+                if (!response.length) {
+                    document.querySelector('.todo_list').innerHtml = '<div class="todo_none"><p>등록된 투두가 없습니다.</p></div>';
+                    return false;
                 }
 
-                const particle = (hasCode(fieldName)) ? '을' : '를'
-                const elementType = (target.type === 'text' || target.type === 'password' || target.type === 'search' || target.type === 'textArea') ? '입력' : '선택';
-                alert( `${fieldName + particle} ${elementType}해 주세요.` );
+                const json_to_response = JSON.stringify(response);
+                console.log(json_to_response);
+                console.log(typeof(json_to_response))
 
-                target.value = '';
-                (!focusTarget ? target : focusTarget).focus();
-                throw new Error(`"${target.id}" is required...`)
+                $.each(response, function(json_to_response, row) {
+                    $("#todo_list").append(row.todoContent + " ");
+                    $("#todo_list").append(row.todoDate + "<br>");
+                });
+            },
+            error: function (request, status, error) {
+                console.log(error);
             }
+        })
+    }
 
-            function countingLength(todoContent) {
-                if (todoContent.value.length > 300) {
-                    alert('댓글을 300자 이하로 입력해 주세요.');
-                    todoContent.value = todoContent.value.substring(0, 300);
-                    todoContent.focus();
-                }
-                document.getElementById('counter').innerText = todoContent.value.length + '/300자';
-            }
-
-            window.onload = () => {
-                todoList();
-            }
-
-            function todoList() {
-                const userId = [[ ${user.userId} ]]
-                console.log(userId);
-
-                $.ajax({
-                    url: `/todo-list`,
-                    type: 'get',
-                    dataType: 'json',
-                    async: false,
-                    success: function (response) {
-                        if (!response.length) {
-                            document.querySelector('.todo_list').innerHTML = '<div class="todo_none"><p>등록된 todo가 없습니다.</p></div>';
-                            return false;
-                        }
-
-                        let todoHtml = '';
-
-                        console.log(response);
-                        console.log(typeof(response));
-
-                        response.forEach(row => {
-                            todoHtml += `
-                                <div>
-                                    <div class="todo_body">
-                                        <span class="form-control">${row.todoContent}</span>
-                                        <div class="todo_date">${row.todoDate}</div>
-                                    </div>
-                                    <p class="func_btn">
-                                        <button type="button" class="todo_btn"><span class="icons icon_modify">수정</span></button>
-                                        <button type="button" class="todo_btn"><span class="icons icon_del">삭제</span></button>
-                                    </p>
-                                </div>
-                            `;
-                        })
-
-                        document.querySelector('.todo_list').innerHTML = todoHtml;
-                        console.log(response);
-                    },
-                error: function (request, status, error) {
-                    console.log(error)
-                    }
-                })
-            }
-
-            function addTodo() {
-                const todoContent = document.getElementById('todoContent');
-                isValid(todoContent, 'todo');
-
-                const userId = [[ ${user.userId} ]];
-                const params = {
-                    userId : userId,
-                    todoContent : todoContent.value,
+    function groupList() {
+        $.ajax({
+            url: `/userGroup-list`,
+            type: 'get',
+            dataType: 'json',
+            async: false,
+            success: function (response) {
+                if (!response.length) {
+                    document.querySelector('.group_list').innerHtml = '<div class="todo_none"><p>가입한 그룹이 없습니다.</p></div>';
+                    return false;
                 }
 
-                $.ajax({
-                    url : `/todo-list`,
-                    type : 'post',
-                    contentType : 'application/json; charset=utf-8',
-                    data : JSON.stringify(params),
-                    dataType : 'script',
-                    async : false,
-                    success : function (response) {
-                        alert('새로운 todo가 추가되었습니다.');
-                        todoContent.value = '';
-                        document.getElementById('counter').innerText = '0/300자';
-                        todoList();
-                        console.log(response);
-                    },
-                    error : function (request, status, error) {
-                        console.log(request);
-                        console.log(error);
-                        console.log(status);
-                    }
-                })
+                const json_to_response = JSON.stringify(response);
+                console.log(json_to_response);
+                console.log(typeof(json_to_response))
+
+                $.each(response, function(json_to_response, row) {
+                    $("#group_list").append(row.groupName + " ");
+                    $("#group_list").append(row.groupAim + "<br>");
+                });
+            },
+            error: function (request, status, error) {
+                console.log(error);
             }
-            /*]]>*/
-        </script>
+        })
+    }
+</script>
 </body>
 </html>

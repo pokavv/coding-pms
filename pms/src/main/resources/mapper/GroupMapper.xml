@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dev.pms.mapper.GroupMapper">
     <select id="getGroupByUser" resultType="com.dev.pms.domain.GroupVo">
-        select *
+        select g.group_id, g.group_name, g.group_description, g.group_aim, g.created_date, g.is_recruit, g.is_completed
         from group_table g
         inner join belong_table b
         on g.group_id = b.group_id
         inner join user_table u
         on b.user_id = u.user_id
+        where b.user_id = #{userId}
         order by u.user_id
     </select>
 </mapper>
