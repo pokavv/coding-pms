@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Controller
-public class HeadController {
+public class HeaderController {
 
     @GetMapping("/group-list")
     public String groupList(HttpServletRequest request, Model model) {

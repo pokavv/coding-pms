@@ -21,9 +21,9 @@
 
     <insert id="insertTodo" useGeneratedKeys="true" parameterType="com.dev.pms.domain.TodoDto">
         insert into todo_table
-        (todo_content, todo_date, is_completed)
+        (todo_content, todo_date, is_completed, user_id)
         values
-        (#{todoContent}, #{todoDate}, default)
+        (#{todoContent}, current_timestamp, false, #{userId})
     </insert>
 
     <update id="completeTodo" parameterType="com.dev.pms.domain.TodoDto">

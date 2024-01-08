@@ -24,6 +24,10 @@ public class TodoService {
         return todoMapper.getTodoListIsCompleted(userId);
     }
 
+    public TodoVo getTodoById(Long todoId) {
+        return todoMapper.getTodoById(todoId);
+    }
+
     public void addTodo(TodoDto todoDto) {
         todoMapper.insertTodo(todoDto);
     }

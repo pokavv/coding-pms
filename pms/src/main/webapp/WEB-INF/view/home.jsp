@@ -27,9 +27,26 @@
     </form>
 
     <br class="my-4">
+
     <label for="todo_list" class="home-label">TODO 리스트</label>
     <div id="todo_list" class="todo_list">
 
+    </div>
+    <button class="w-100 btn btn-secondary btn" onclick="location:href='/todo-all'"
+            type="button">전체TODO보기</button>
+
+    <br>
+
+    <div class="todo_write">
+        <label for="todo_input">TODO 추가</label>
+        <div id="todo_input" class="todo_input">
+            <p><textarea id="todoContent" name="todoContent" onkeyup="countingLength(this);"
+                cols="90" rows="4" placeholder="새로운 TODO를 입력해 보세요!"></textarea></p>
+            <span>
+                <button type="button" class="btn-save" onclick="addTodo();">등록</button>
+                <i id="counter">0/300자</i>
+            </span>
+        </div>
     </div>
 
     <br class="my-4">
@@ -38,6 +55,38 @@
     </div>
 
 <script>
+
+    function hasCode(value) {
+        return ((value.charCodeAt(value.length - 1) - 0xAC00) % 28) > 0;
+    }
+
+    function isValid(target, fieldName, focusTarget) {
+        if (target.value.trim()) {
+            return true;
+        }
+
+        const particle = (hasCode(fieldName)) ? '을' : '를';
+        const elementType = (target.type === 'text' || target.type === 'password' || target.type === 'search' || target.type === 'textarea') ? '입력' : '선택';
+        alert( `${fieldName + particle} ${elementType}해 주세요.`);
+
+        target.value = '';
+        (!focusTarget ? target : focusTarget).focus();
+        throw new Error(`"${target.id}" is required...!`)
+    }
+
+    function countingLength(todoContent) {
+        if (todoContent.value.length > 300) {
+            alert('TODO를 300자 이하로 입력해 주세요.');
+            todoContent.value = todoContent.value.substring(0, 300);
+            todoContent.focus();
+        }
+        document.getElementById('counter').innerText = todoContent.value.length + '/300자';
+    }
+
+    function todoClear() {
+        $("#todo_list").empty();
+    }
+
     window.onload = () => {
         todoList();
         groupList();
@@ -93,6 +142,36 @@
             },
             error: function (request, status, error) {
                 console.log(error);
+            }
+        })
+    }
+
+    function addTodo() {
+        const todoContent = document.getElementById('todoContent');
+        isValid(todoContent, 'TODO');
+
+        const params = {
+            todoContent : todoContent.value
+        }
+        console.log(params, typeof(params));
+
+        $.ajax({
+            url: `/add-todo`,
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(params),
+            dataType: 'script',
+            async: false,
+            success: function(response) {
+                alert('새로운 TODO를 등록했습니다.');
+                todoContent.value = '';
+                document.getElementById('counter').innerText = '0/300자';
+                console.log(response);
+                todoClear();
+                todoList();
+            },
+            error: function(request, status, error) {
+                console.log(request, error, status);
             }
         })
     }
