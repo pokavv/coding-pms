@@ -10,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,7 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/todo-list")
+    @ResponseBody
     public List<TodoVo> getTodoList(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
@@ -32,6 +30,7 @@ public class TodoController {
     }
 
     @PostMapping("/add-todo")
+    @ResponseBody
     public TodoVo addTodo(HttpServletRequest request,
                           @RequestBody TodoDto addTodoParams) {
         HttpSession session = request.getSession();
@@ -57,5 +56,12 @@ public class TodoController {
         log.info("completed todoList = {}", todoListIsCompleted);
 
         return "userTodoList";
+    }
+
+    @GetMapping("/todo-detail/{todoId}")
+    public String todoDetail(@PathVariable Long todoId, Model model) {
+        TodoVo todoById = todoService.getTodoById(todoId);
+        model.addAttribute("todo", todoById);
+        return "todo-detail";
     }
 }

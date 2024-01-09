@@ -25,7 +25,10 @@
                     <tr>
                         <td>"${item.todoContent}"</td>
                         <td>"${item.todoDate}"</td>
-                        <td><button class="complete-btn" type="button">완료</button></td>
+                        <td>
+                            <button class="todo-detail-btn" type="button"
+                            onclick="location.href='/todo-detail/${item.todoId}'">설정</button>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
@@ -43,7 +46,6 @@
                     <tr>
                         <td>"${item.todoContent}"</td>
                         <td>"${item.todoDate}"</td>
-                        <td><button class="complete-btn" type="button">완료</button></td>
                     </tr>
                 </c:forEach>
             </table>

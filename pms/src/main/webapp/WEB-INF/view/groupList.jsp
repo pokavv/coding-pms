@@ -15,11 +15,13 @@
         <table class="group-table">
             <tr>
                 <th>그룹명</th>
+                <th>그룹목표</th>
                 <th>그룹생성일</th>
             </tr>
 
             <tr>
                 <td>그룹1</td>
+                <td>팀프로젝트</td>
                 <td>2024-01-07</td>
             </tr>
         </table>
