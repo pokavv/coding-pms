@@ -9,9 +9,11 @@ import java.util.List;
 @Mapper
 public interface TodoMapper {
 
-    List<TodoVo> getTodoList(Long userId);
+    List<TodoVo> getTodoListUncompleted(Long userId);
 
     List<TodoVo> getTodoListIsCompleted(Long userId);
+
+    List<TodoVo> getTodoListAll(Long userId);
 
     TodoVo getTodoById(Long todoId);
 

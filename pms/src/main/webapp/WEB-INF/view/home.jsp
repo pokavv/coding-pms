@@ -32,8 +32,11 @@
     <div id="todo_list" class="todo_list">
 
     </div>
-    <button class="w-100 btn btn-secondary btn" onclick="location:href='/todo-all'"
-            type="button">전체TODO보기</button>
+    <button class="w-100 btn btn-secondary btn" type="button">
+        <a href="/todo-list/${userId}">
+            전체TODO보기
+        </a>
+    </button>
 
     <br>
 

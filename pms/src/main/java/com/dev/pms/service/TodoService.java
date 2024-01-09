@@ -16,12 +16,16 @@ public class TodoService {
     @Autowired
     private TodoMapper todoMapper;
 
-    public List<TodoVo> getTodoList(Long userId) {
-        return todoMapper.getTodoList(userId);
+    public List<TodoVo> getTodoListUncompleted(Long userId) {
+        return todoMapper.getTodoListUncompleted(userId);
     }
 
     public List<TodoVo> getTodoListIsCompleted(Long userId) {
         return todoMapper.getTodoListIsCompleted(userId);
+    }
+
+    public List<TodoVo> getTodoListAll(Long userId) {
+        return todoMapper.getTodoListAll(userId);
     }
 
     public TodoVo getTodoById(Long todoId) {
