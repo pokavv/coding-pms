@@ -32,9 +32,9 @@
         (#{todoContent}, current_timestamp, false, #{userId})
     </insert>
 
-    <update id="completeTodo" parameterType="com.dev.pms.domain.TodoDto">
+    <update id="completeTodo" parameterType="Long">
         update todo_table
-        set is_completed=1
+        set is_completed=true
         where todo_id=#{todoId}
     </update>
 

@@ -12,12 +12,14 @@
 
     <h2>환영합니다 ${user.name}님!</h2>
 
+    <hr class="my-4">
     <h2>${user.name}님의 회원정보</h2>
     <p>name: ${user.name}</p>
     <p>email: ${user.email}</p>
     <p>phone: ${user.phone}</p>
     <p>website: ${user.website}</p>
 
+    <br>
     <button type="button" onclick="location.href='update'">정보수정</button>
     <form action="/logout" method="post">
         <button type="submit">로그아웃</button>
@@ -26,22 +28,23 @@
         <button type="submit">회원탈퇴</button>
     </form>
 
-    <br class="my-4">
+    <hr class="my-4">
 
-    <label for="todo_list" class="home-label">TODO 리스트</label>
+    <h2>TODO 리스트</h2>
     <div id="todo_list" class="todo_list">
 
     </div>
+
+    <br>
     <button class="w-100 btn btn-secondary btn" type="button">
         <a href="/todo-list/${userId}">
             전체TODO보기
         </a>
     </button>
-
     <br>
 
     <div class="todo_write">
-        <label for="todo_input">TODO 추가</label>
+        <h4>TODO 추가</h4>
         <div id="todo_input" class="todo_input">
             <p><textarea id="todoContent" name="todoContent" onkeyup="countingLength(this);"
                 cols="90" rows="4" placeholder="새로운 TODO를 입력해 보세요!"></textarea></p>
@@ -52,8 +55,8 @@
         </div>
     </div>
 
-    <br class="my-4">
-    <label for="group_list" class="home-label">참가 그룹</label>
+    <hr class="my-4">
+    <h2>참가 그룹</h2>
     <div id="group_list" class="group_list">
     </div>
 

@@ -10,7 +10,19 @@
 <body>
     <jsp:include page="header.jsp"></jsp:include>
 
+    <form object="${groupSearchCond}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" field="*{groupName}" class="form-control" placeholder="그룹명"/>
+            </div>
+            <div class="col">
+                <input type"text" field="^{groupAim}" class="form-control" placeholder="그룹목표"/>
+            </div>
+        </div>
+    </form>
+
     <br class="my-4">
+
     <div class="container">
         <table class="group-table">
             <tr>

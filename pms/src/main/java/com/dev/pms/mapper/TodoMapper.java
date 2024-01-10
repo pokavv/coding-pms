@@ -19,7 +19,7 @@ public interface TodoMapper {
 
     void insertTodo(TodoDto todoDto);
 
-    void completeTodo(TodoDto todoDto);
+    void completeTodo(Long todoId);
 
     void deleteTodo(Long todoId);
 }

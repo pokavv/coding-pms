@@ -12,6 +12,7 @@
 
     <h2>TODO List</h2>
 
+    <hr class="my-4">
     <div class="container">
         <div class="uncompleted-todo">
             <h2>진행중인 TODO 목록</h2>
@@ -27,13 +28,13 @@
                         <td>"${item.todoDate}"</td>
                         <td>
                             <button class="todo-detail-btn" type="button"
-                            onclick="location.href='/todo-detail/${item.todoId}'">설정</button>
+                            onclick="location.href='/todo-detail/${item.todoId}'">더보기</button>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
-        <br class="my-4">
+    <hr class="my-4">
         <div class="completed-todo">
             <h2>완료한 TODO 목록</h2>
             <table class="completed-todo-table">
@@ -46,9 +47,17 @@
                     <tr>
                         <td>"${item.todoContent}"</td>
                         <td>"${item.todoDate}"</td>
+                        <td>
+                            <button class="todo-detail-btn" type="button"
+                            onclick="location.href='/todo-detail/${item.todoId}'">더보기</button>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
+        </div>
+    <hr class="my-4">
+        <div>
+            <button onclick="history.back()">뒤로</button>
         </div>
     </div>
 </body>

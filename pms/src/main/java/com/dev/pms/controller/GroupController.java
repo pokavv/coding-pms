@@ -1,5 +1,6 @@
 package com.dev.pms.controller;
 
+import com.dev.pms.domain.GroupSearchCond;
 import com.dev.pms.domain.GroupVo;
 import com.dev.pms.filter.SessionConst;
 import com.dev.pms.service.GroupService;
@@ -8,7 +9,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -25,5 +28,14 @@ public class GroupController {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
         return groupService.getGroupByUer(userId);
+    }
+
+    @GetMapping("/group-list")
+    public String groupList(@ModelAttribute("groupSearchCond")GroupSearchCond cond,
+                            Model model) {
+        List<GroupVo> groupAll = groupService.getGroupAll(cond);
+        model.addAttribute("group-list", groupAll);
+        log.info("model.group-list = {}", groupAll);
+        return "groupList";
     }
 }

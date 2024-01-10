@@ -36,8 +36,8 @@ public class TodoService {
         todoMapper.insertTodo(todoDto);
     }
 
-    public void completeTodo(TodoDto todoDto) {
-        todoMapper.completeTodo(todoDto);
+    public void completeTodo(Long todoId) {
+        todoMapper.completeTodo(todoId);
     }
 
     public void deleteTodo(Long todoId) {

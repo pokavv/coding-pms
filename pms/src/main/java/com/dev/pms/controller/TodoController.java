@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,5 +64,27 @@ public class TodoController {
         TodoVo todoById = todoService.getTodoById(todoId);
         model.addAttribute("todo", todoById);
         return "todo-detail";
+    }
+
+    @PostMapping("/todo-detail/{todoId}/complete")
+    public String todoComplete(@PathVariable() Long todoId,
+                               Long userId) {
+        TodoVo todoById = todoService.getTodoById(todoId);
+        userId = todoById.getUserId();
+
+        todoService.completeTodo(todoId);
+        log.info("TODO 완료 성공");
+        return "redirect:/todo-list/" + userId;
+    }
+
+    @PostMapping("/todo-detail/{todoId}/delete")
+    public String todoDelete(@PathVariable Long todoId,
+                             Long userId) {
+        TodoVo todoById = todoService.getTodoById(todoId);
+        userId = todoById.getUserId();
+
+        todoService.deleteTodo(todoId);
+        log.info("TODO 삭제 성공");
+        return "redirect:/todo-list/" + userId;
     }
 }
