@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HeaderController {
 
-    @GetMapping("/group-list")
+    @GetMapping("/home-group-list")
     public String groupList(HttpServletRequest request, Model model) {
         return "groupList";
     }

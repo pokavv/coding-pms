@@ -16,16 +16,16 @@
         select *
         from group_table
         <where>
-            <if test="group_name != null and group_name != ''">
+            <if test="groupName != null and groupName != ''">
                 and group_name like concat('%',#{groupName},'%')
             </if>
-            <if test="group_aim != null and group_aim != ''">
+            <if test="groupAim != null and groupAim != ''">
                 and group_aim like concat('%',#{groupAim},'%')
             </if>
-            <if test="is_recruit != null and is_recruit != ''">
+            <if test="isRecruit != null and isRecruit != ''">
                 and is_recruit like concat('%',#{isRecruit},'%')
             </if>
-            <if test="is_completed != null and is_completed != ''">
+            <if test="isCompleted != null and isCompleted != ''">
                 and is_completed like concat('%',#{isCompleted},'%')
             </if>
         </where>

@@ -16,7 +16,11 @@
                 <input type="text" field="*{groupName}" class="form-control" placeholder="그룹명"/>
             </div>
             <div class="col">
-                <input type"text" field="^{groupAim}" class="form-control" placeholder="그룹목표"/>
+                <input type"text" field="*{groupAim}" class="form-control" placeholder="그룹목표"/>
+            </div>
+            <div>
+            </div>
+            <div>
             </div>
         </div>
     </form>
@@ -35,7 +39,7 @@
                 <td>그룹1</td>
                 <td>팀프로젝트</td>
                 <td>2024-01-07</td>
-            </tr>
+            </t0r>
         </table>
     </div>
 </body>

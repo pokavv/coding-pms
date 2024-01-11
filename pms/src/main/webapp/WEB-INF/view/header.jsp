@@ -18,7 +18,7 @@
         <nav id="nav">
             <ul class="main-menu">
                 <li><a href="/" class="home">홈</a></li>
-                <li><a href="/group-list" class="group-list">그룹 찾기</a></li>
+                <li><a href="/home-group-list" class="group-list">그룹 찾기</a></li>
                 <li><a href="/my-group" class="my-group">내 그룹</a></li>
                 <li><a href="/my-info" class="my-info">내 정보</a></li>
             </ul>
