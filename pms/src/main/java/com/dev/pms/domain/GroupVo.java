@@ -14,4 +14,7 @@ public class GroupVo {
     private LocalDateTime createdDate;
     private Boolean isRecruit;
     private Boolean isCompleted;
+
+    private Boolean isAdmitted;
+    private Boolean isManager;
 }

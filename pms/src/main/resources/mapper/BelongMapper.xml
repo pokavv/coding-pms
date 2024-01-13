@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dev.pms.mapper.BelongMapper">
+    <insert id="joinGroup" useGeneratedKeys="true" parameterType="com.dev.pms.domain.BelongDto">
+        insert into belong_table
+        (user_id, group_id, is_admitted, is_manager)
+        values
+        (#{userId}, #{groupId}, false, false)
+    </insert>
+
+    <select id="checkBelongInfoByUser" resultType="com.dev.pms.domain.BelongDto">
+        select *
+        from belong_table
+        where user_id = #{userId} and group_id = #{groupId}
+    </select>
+</mapper>

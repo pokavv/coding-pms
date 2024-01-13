@@ -16,11 +16,15 @@ public class GroupService {
     @Autowired
     private GroupMapper groupMapper;
 
-    public List<GroupVo> getGroupByUer(Long userId) {
+    public List<GroupVo> getGroupByUser(Long userId) {
         return groupMapper.getGroupByUser(userId);
     }
 
     public List<GroupVo> getGroupAll(GroupSearchCond cond) {
         return groupMapper.getGroupAll(cond);
+    }
+
+    public GroupVo getGroupById(Long groupId) {
+        return groupMapper.getGroupById(groupId);
     }
 }

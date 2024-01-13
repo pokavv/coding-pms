@@ -12,4 +12,6 @@ public interface GroupMapper {
     List<GroupVo> getGroupByUser(Long userId);
 
     List<GroupVo> getGroupAll(GroupSearchCond groupSearchCond);
+
+    GroupVo getGroupById(Long groupId);
 }

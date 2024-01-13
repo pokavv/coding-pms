@@ -11,7 +11,7 @@
     <header id="header">
         <div id="profile">
             <span class="profile-img">
-                <img src="/images/logo.jpg" style="height: 200px; width: 200px;" alt="에러">
+                <img src="/images/logo.png" style="height: 200px; width: 200px;" alt="에러">
             </span>
             <h1 id="name">Myname</h1>
         </div>

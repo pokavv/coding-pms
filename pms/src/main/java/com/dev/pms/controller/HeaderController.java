@@ -14,20 +14,20 @@ public class HeaderController {
 
     @GetMapping("/home-group-list")
     public String groupList(HttpServletRequest request, Model model) {
-        return "groupList";
+        return "redirect:/group-list";
     }
 
-    @GetMapping("/my-group")
+    @GetMapping("/home-my-group")
     public String myGroup(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
-        return "myGroup";
+        return "redirect:/my-group";
     }
 
-    @GetMapping("/my-info")
+    @GetMapping("/home-my-info")
     public String myInfo(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
-        return "myInfo";
+        return "redirect:/my-info";
     }
 }
