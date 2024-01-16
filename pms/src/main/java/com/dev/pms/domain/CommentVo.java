@@ -10,4 +10,6 @@ public class CommentVo {
     private Long commentId;
     private String commentContent;
     private LocalDateTime commentDate;
+    private Long userId;
+    private Long postId;
 }

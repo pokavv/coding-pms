@@ -28,4 +28,8 @@ public class PostService {
     public void addPost(PostDto postDto) {
         postMapper.addPost(postDto);
     }
+
+    public PostVo getPost(Long postId) {
+        return postMapper.getPost(postId);
+    }
 }

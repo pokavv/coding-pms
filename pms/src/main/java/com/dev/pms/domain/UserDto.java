@@ -6,7 +6,7 @@ import lombok.Data;
 public class UserDto {
 
     private Long userId;
-    private String name;
+    private String userName;
     private String email;
     private String password;
     private String phone;
@@ -14,9 +14,9 @@ public class UserDto {
 
     public UserDto() {}
 
-    public UserDto(String name, String email, String password,
+    public UserDto(String userName, String email, String password,
                    String phone, String website) {
-        this.name = name;
+        this.userName = userName;
         this.email = email;
         this.password = password;
         this.phone = phone;

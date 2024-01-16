@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dev.pms.mapper.PostMapper">
     <select id="getPosts" resultType="com.dev.pms.domain.PostVo">
-        select p.post_id, p.title, p.content, p.post_date, p.user_id, u.name, p.group_id, g.group_name
+        select p.post_id, p.title, p.content, p.post_date, p.user_id, u.user_name, p.group_id, g.group_name
         from post_table as p
         inner join user_table as u
         on p.user_id = u.user_id
@@ -14,9 +14,19 @@
                 and p.title like concat('%',#{postSearchCond.title},'%')
             </if>
             <if test="postSearchCond.userName != null and postSearchCond.userName != ''">
-                and u.name like concat('%',#{postSearchCond.userName},'%')
+                and u.user_name like concat('%',#{postSearchCond.userName},'%')
             </if>
         </where>
+    </select>
+
+    <select id="getPost" resultType="com.dev.pms.domain.PostVo">
+        select p.*, u.user_name, g.group_name
+        from post_table as p
+        inner join user_table as u
+        on p.user_id = u.user_id
+        inner join group_table as g
+        on p.group_id = g.group_id
+        where p.post_id = #{postId}
     </select>
 
     <select id="getGroupName" resultType="String">

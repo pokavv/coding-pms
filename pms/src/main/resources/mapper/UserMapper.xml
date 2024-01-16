@@ -14,9 +14,9 @@
 
     <insert id="insertUser" useGeneratedKeys="true" parameterType="com.dev.pms.domain.UserVo">
         insert into user_table
-        (name, email, password, phone, website)
+        (user_name, email, password, phone, website)
         values
-        (#{name}, #{email}, #{password}, #{phone}, #{website})
+        (#{userName}, #{email}, #{password}, #{phone}, #{website})
     </insert>
 
     <select id="getUserById" resultType="com.dev.pms.domain.UserVo">
@@ -27,7 +27,7 @@
 
     <update id="updateUser" parameterType="com.dev.pms.domain.UserVo">
         update user_table
-        set name=#{name},
+        set user_name=#{userName},
             email=#{email},
             password=#{password},
             phone=#{phone},

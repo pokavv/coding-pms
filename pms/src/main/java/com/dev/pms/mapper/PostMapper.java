@@ -17,4 +17,6 @@ public interface PostMapper {
     String getGroupName(Long groupId);
 
     void addPost(PostDto postDto);
+
+    PostVo getPost(Long postId);
 }

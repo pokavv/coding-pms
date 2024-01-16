@@ -24,6 +24,10 @@ public class BelongService {
         return belongMapper.checkBelongInfoByUser(userId, groupId);
     }
 
+    public Long checkPermissionReadPost(Long postId, Long userId) {
+        return belongMapper.checkPermissionReadPost(postId, userId);
+    }
+
     public PermissionVo checkWritePermission(Long userId, Long groupId) {
         return belongMapper.checkWritePermission(userId, groupId);
     }

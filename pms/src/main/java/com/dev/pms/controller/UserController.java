@@ -42,7 +42,7 @@ public class UserController {
     public String login(String email, String password, HttpServletRequest request,
                         @RequestParam(defaultValue = "/", required = false) String redirectURL) {
         Long loginId = userService.login(email, password);
-        String username = userService.getUserById(loginId).getName();
+        String username = userService.getUserById(loginId).getUserName();
 
         if (loginId == null) {
             log.info("로그인 실패");

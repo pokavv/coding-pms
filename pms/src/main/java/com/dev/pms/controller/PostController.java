@@ -35,7 +35,7 @@ public class PostController {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
 
-        if (belongService.checkBelongInfoByUser(userId, groupId) != null) {
+        if (isPermission(groupId, request)) {
             List<PostVo> posts = postService.getPosts(groupId, cond);
             String groupName = postService.getGroupName(groupId);
 
@@ -55,7 +55,7 @@ public class PostController {
                           HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
-        if (isWritePermission(groupId, request)) {
+        if (isPermission(groupId, request)) {
             model.addAttribute("userId", userId);
             model.addAttribute("groupId", groupId);
             log.info("글작성 userId={}, groupId={}", userId, groupId);
@@ -68,7 +68,7 @@ public class PostController {
     public String addPost(@PathVariable("groupId") Long groupId,
                           PostDto postDto, HttpServletRequest request,
                           RedirectAttributes redirectAttributes) {
-        if (isWritePermission(groupId, request)) {
+        if (isPermission(groupId, request)) {
             HttpSession session = request.getSession();
             Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
             postDto.setUserId(userId);
@@ -83,14 +83,37 @@ public class PostController {
         return "/login";
     }
 
-    private Boolean isWritePermission(Long groupId, HttpServletRequest request) {
+    @GetMapping("/post-detail/{postId}")
+    public String postDetail(@PathVariable("postId") Long postId,
+                             HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+        if (belongService.checkPermissionReadPost(postId, userId) != null) {
+            PostVo post = postService.getPost(postId);
+            model.addAttribute("post", post);
+            model.addAttribute("isPosted", isPosted(postId, userId));
+            return "post-detail";
+        }
+        return "/";
+    }
+
+    private Boolean isPosted(Long postId, Long userId) {
+        if (postService.getPost(postId).getUserId().equals(userId)) {
+            log.info("해당 글의 작성자입니다.");
+            return true;
+        }
+        log.info("해당 글의 작성자가 아닙니다.");
+        return false;
+    }
+
+    private Boolean isPermission(Long groupId, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
         if (belongService.checkWritePermission(userId, groupId) != null) {
-            log.info("글작성 권한 O");
+            log.info("그룹 접근 권한 O");
             return true;
         }
-        log.info("글작성 권한 X");
+        log.info("그룹 접근 권한 X");
         return false;
     }
 }

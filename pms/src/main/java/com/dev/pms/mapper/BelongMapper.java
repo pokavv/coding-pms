@@ -14,4 +14,6 @@ public interface BelongMapper {
     PermissionVo checkWritePermission(Long userId, Long groupId);
 
     PermissionVo checkManager(Long userId, Long groupId);
+
+    Long checkPermissionReadPost(Long postId, Long userId);
 }

@@ -14,6 +14,17 @@
         where user_id = #{userId} and group_id = #{groupId}
     </select>
 
+    <select id="checkPermissionReadPost" resultType="Long">
+        select p.group_id
+        from post_table as p
+        inner join user_table as u
+        on p.user_id = u.user_id
+        inner join group_table as g
+        on p.group_id = g.group_id
+        where p.post_id = #{postId}
+        and p.user_id = #{userId}
+    </select>
+
     <select id="checkWritePermission" resultType="com.dev.pms.domain.PermissionVo">
         select *
         from belong_table
