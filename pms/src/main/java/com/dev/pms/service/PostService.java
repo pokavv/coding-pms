@@ -1,6 +1,7 @@
 package com.dev.pms.service;
 
 import com.dev.pms.domain.PostDto;
+import com.dev.pms.domain.PostSearchCond;
 import com.dev.pms.domain.PostVo;
 import com.dev.pms.mapper.PostMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,8 @@ public class PostService {
     @Autowired
     PostMapper postMapper;
 
-    public List<PostVo> getPosts(Long groupId) {
-        return postMapper.getPosts(groupId);
+    public List<PostVo> getPosts(Long groupId, PostSearchCond cond) {
+        return postMapper.getPosts(groupId, cond);
     }
 
     public String getGroupName(Long groupId) {

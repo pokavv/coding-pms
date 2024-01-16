@@ -1,6 +1,7 @@
 package com.dev.pms.controller;
 
 import com.dev.pms.domain.PostDto;
+import com.dev.pms.domain.PostSearchCond;
 import com.dev.pms.domain.PostVo;
 import com.dev.pms.filter.SessionConst;
 import com.dev.pms.service.BelongService;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,10 +30,13 @@ public class PostController {
 
     @GetMapping("/posts/{groupId}")
     public String getPosts(@PathVariable("groupId") Long groupId,
+                           @ModelAttribute("postSearchCond") PostSearchCond cond,
                            HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        if (isWritePermission(groupId, request)) {
-            List<PostVo> posts = postService.getPosts(groupId);
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+
+        if (belongService.checkBelongInfoByUser(userId, groupId) != null) {
+            List<PostVo> posts = postService.getPosts(groupId, cond);
             String groupName = postService.getGroupName(groupId);
 
             model.addAttribute("posts", posts);

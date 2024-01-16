@@ -10,11 +10,11 @@
         on p.group_id = g.group_id
         <where>
             p.group_id = #{groupId}
-            <if test="title != null and title != ''">
-                and title like concat('%',#{title},'%')
+            <if test="postSearchCond.title != null and postSearchCond.title != ''">
+                and p.title like concat('%',#{postSearchCond.title},'%')
             </if>
-            <if test="userName != null and userName != ''">
-                and name like concat('%',#{userName},'%')
+            <if test="postSearchCond.userName != null and postSearchCond.userName != ''">
+                and u.name like concat('%',#{postSearchCond.userName},'%')
             </if>
         </where>
     </select>

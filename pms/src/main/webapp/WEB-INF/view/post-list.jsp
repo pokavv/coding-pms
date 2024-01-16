@@ -15,10 +15,10 @@
     <form id="posts-search-form" object="${postSearchCond}" method="get" class="form-inline">
         <div class="row">
             <div class="col">
-                <input type="text" field="*{title}" name="title" class="form-control" placeholder="제목"/>
+                <input type="text" field="*{postSearchCond.title}" name="title" class="form-control" placeholder="제목"/>
             </div>
             <div class="col">
-                <input type="text" field="*{userName}" name="userName" class="form-control" placeholder="작성자"/>
+                <input type="text" field="*{postSearchCond.userName}" name="userName" class="form-control" placeholder="작성자"/>
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-secondary mb-2">검색</button>
@@ -41,8 +41,8 @@
                     <thead>
                         <tr>
                             <th>제목</th>
-                            <th>내용</th>
                             <th>작성자</th>
+                            <th>작성일</th>
                         </tr>
                     </thead>
                     <tbody>
