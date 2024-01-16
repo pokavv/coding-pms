@@ -98,3 +98,10 @@ default 0
 alter table belong_table
 add is_manager boolean not null
 default 0
+
+alter table post_table
+add user_id bigint not null
+
+alter table post_table
+add foreign key (user_id)
+references user_table (user_id) on delete cascade

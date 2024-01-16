@@ -13,4 +13,21 @@
         from belong_table
         where user_id = #{userId} and group_id = #{groupId}
     </select>
+
+    <select id="checkWritePermission" resultType="com.dev.pms.domain.PermissionVo">
+        select *
+        from belong_table
+        where user_id=#{userId}
+        and group_id=#{groupId}
+        and is_admitted=true
+    </select>
+
+    <select id="checkManager" resultType="com.dev.pms.domain.PermissionVo">
+        select *
+        from belong_table
+        where user_id=#{userId}
+        and group_id=#{groupId}
+        and is_admitted=true
+        and is_manager=true
+    </select>
 </mapper>

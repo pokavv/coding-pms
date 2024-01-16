@@ -1,6 +1,7 @@
 package com.dev.pms.service;
 
 import com.dev.pms.domain.BelongDto;
+import com.dev.pms.domain.PermissionVo;
 import com.dev.pms.domain.UserDto;
 import com.dev.pms.mapper.BelongMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -21,5 +22,13 @@ public class BelongService {
 
     public BelongDto checkBelongInfoByUser(Long userId, Long groupId) {
         return belongMapper.checkBelongInfoByUser(userId, groupId);
+    }
+
+    public PermissionVo checkWritePermission(Long userId, Long groupId) {
+        return belongMapper.checkWritePermission(userId, groupId);
+    }
+
+    public PermissionVo checkManager(Long userId, Long groupId) {
+        return belongMapper.checkManager(userId, groupId);
     }
 }

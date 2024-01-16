@@ -44,7 +44,7 @@ public class GroupController {
                               Model model) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
-        model.addAttribute("userId");
+        model.addAttribute("userId", userId);
 
         GroupVo groupById = groupService.getGroupById(groupId);
         model.addAttribute("group", groupById);
@@ -62,5 +62,20 @@ public class GroupController {
         model.addAttribute("groups", groupByUser);
         log.info("{}'s group = {}", session.getAttribute(SessionConst.LOGIN_USER_NAME), model.getAttribute("groups"));
         return "myGroup";
+    }
+
+    @GetMapping("/my-group/{groupId}")
+    public String myGroup(@PathVariable("groupId") Long groupId,
+                          HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+        String userName = (String) session.getAttribute(SessionConst.LOGIN_USER_NAME);
+        model.addAttribute("userId", userId);
+        model.addAttribute("userName", userName);
+
+        GroupVo groupById = groupService.getGroupById(groupId);
+        model.addAttribute("group", groupById);
+
+        return "my-group-detail";
     }
 }
