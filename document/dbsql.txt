@@ -103,5 +103,15 @@ alter table post_table
 add user_id bigint not null
 
 alter table post_table
+add post_date timestamp not null
+
+alter table post_table
+add foreign key (user_id)
+references user_table (user_id) on delete cascade
+
+alter table comment_table
+add column user_id bigint
+
+alter table comment_table
 add foreign key (user_id)
 references user_table (user_id) on delete cascade
