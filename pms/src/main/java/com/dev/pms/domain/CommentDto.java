@@ -10,11 +10,15 @@ public class CommentDto {
     private Long commentId;
     private String commentContent;
     private LocalDateTime commentDate;
+    private Long postId;
+    private Long userId;
 
     public CommentDto() {}
 
-    public CommentDto(String commentContent, LocalDateTime commentDate) {
+    public CommentDto(String commentContent, LocalDateTime commentDate, Long postId, Long userId) {
         this.commentContent = commentContent;
         this.commentDate = commentDate;
+        this.postId = postId;
+        this.userId = userId;
     }
 }

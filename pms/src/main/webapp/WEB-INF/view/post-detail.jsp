@@ -5,6 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>게시글</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
@@ -54,8 +55,9 @@
         <div id="comment-input" class="comment-input">
             <textarea id="commentContent" name="commentContent" onkeyup="countingLength(this);"
                     cols="90" rows="4" placeholder="댓글을 입력해 주세요."></textarea>
+            <br>
             <span>
-                <button type="button" class="add-comment-btn" onclick="saveComment();">댓글등록</button>
+                <button type="button" class="add-comment-btn" onclick="addComment();">댓글등록</button>
                 <i id="counter">0/300자</i>
             </span>
         </div>
@@ -90,7 +92,7 @@
         }
 
         function commentClear() {
-            $("#comment_list").empty();
+            $("#comment-list").empty();
         }
 
         window.onload = () => {
@@ -99,13 +101,13 @@
 
         function commentList() {
             $.ajax({
-                url: `/comment-list`,
+                url: `/post-detail/${postId}/comment-list`,
                 type: 'get',
                 dataType: 'json',
                 async: false,
                 success: function (response) {
                     if (!response.length) {
-                        document.querySelector('.comment_list').innerHtml = '<div class="comment_none">등록된 댓글이 없습니다.</div>';
+                        $("#comment-list").append("<div><p>등록된 댓글이 없습니다.</p></div>");
                         return false;
                     }
 
@@ -114,8 +116,9 @@
                     console.log(typeof(json_to_response));
 
                     $.each(response, function(json_to_response, row) {
-                        $("#comment_list").append(row.commentContent + " ");
-                        $("#comment_list").append(row.commentDate + "<br>");
+                        $("#comment-list").append(row.userName + "<br>");
+                        $("#comment-list").append(row.commentContent + " ");
+                        $("#comment-list").append(row.commentDate + "<br>");
                     });
                 },
                 error: function (request, status, error) {
@@ -134,7 +137,7 @@
             console.log(params, typeof(params));
 
             $.ajax({
-                url: `/add-comment`,
+                url: `/post-detail/${postId}/add-comment`,
                 type: 'post',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(params),

@@ -10,11 +10,11 @@
 <body>
     <jsp:include page="header.jsp"></jsp:include>
 
-    <h2>환영합니다 ${user.name}님!</h2>
+    <h2>환영합니다 ${user.userName}님!</h2>
 
     <hr class="my-4">
-    <h2>${user.name}님의 회원정보</h2>
-    <p>name: ${user.name}</p>
+    <h2>${user.userName}님의 회원정보</h2>
+    <p>name: ${user.userName}</p>
     <p>email: ${user.email}</p>
     <p>phone: ${user.phone}</p>
     <p>website: ${user.website}</p>
