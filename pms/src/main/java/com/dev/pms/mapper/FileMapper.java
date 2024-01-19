@@ -12,6 +12,8 @@ public interface FileMapper {
 
     List<FileVo> getFileByPost(Long postId);
 
+    FileVo getFileById(Long fileId);
+
     void insertFile(@Param("postId") Long postId, @Param("files") List<FileDto> fileDtoList);
 
     void deleteFile(Long fileId);

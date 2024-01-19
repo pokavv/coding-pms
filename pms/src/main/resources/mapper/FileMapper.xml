@@ -7,6 +7,12 @@
         where post_id=#{postId}
     </select>
 
+    <select id="getFileById" resultType="com.dev.pms.domain.FileVo">
+        select *
+        from file_table
+        where file_id=#{fileId}
+    </select>
+
     <insert id="insertFile" parameterType="com.dev.pms.domain.FileDto">
         insert into file_table
         (original_name, save_name, file_size, upload_date, post_id)

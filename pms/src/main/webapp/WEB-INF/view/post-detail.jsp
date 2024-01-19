@@ -47,6 +47,12 @@
             </form>
         </div>
         </c:if>
+        <div>
+            <label for="file-list">첨부파일</label>
+            <div id="file-list" class="file-list">
+
+            </div>
+        <div>
         <div class="col">
             <button onclick="history.back()">뒤로</button>
         </div>
@@ -102,6 +108,7 @@
 
         window.onload = () => {
             commentList();
+            fileList();
         }
 
         function commentList() {
@@ -128,6 +135,31 @@
                 },
                 error: function (request, status, error) {
                     console.log(error);
+                }
+            })
+        }
+
+        function fileList() {
+            $.ajax({
+                url: `/post-detail/${postId}/files`,
+                type: 'get',
+                dataType: 'json',
+                async: false,
+                success: function (response) {
+                    if (!response.length) {
+                        $("#file-list").append("<div><p>등록된 파일이 없습니다.</p></div>");
+                        return false;
+                    }
+                    const json_to_response = JSON.stringify(response);
+                    console.log(json_to_response);
+                    console.log(typeof(json_to_response));
+
+                    $.each(response, function(json_to_response, row) {
+                        $("#file-list").append("<a href=" + ${postId} + "/files/download/" + row.fileId + ">" + row.saveName + "</a><br>");
+                    });
+                },
+                error: function (request, status, error) {
+                 console.log(request, error, status);
                 }
             })
         }

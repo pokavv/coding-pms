@@ -10,12 +10,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -93,6 +94,66 @@ public class PostController {
         return "/login";
     }
 
+    @PostMapping("/post-edit/{postId}")
+    public String editPost(@PathVariable Long postId, PostDto postDto,
+                           HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+
+        if (isPosted(postId, userId)) {
+            String title = request.getParameter("post-title");
+            String content = request.getParameter("post-content");
+            postService.updatePost(postId, title, content);
+
+            List<FileDto> files = fileUtils.uploadFiles(postDto.getFiles());
+            try {
+                fileService.insertFile(postId, files);
+            } catch (Exception e) {
+                log.info("파일 업로드 에러");
+            }
+
+            log.info("edit Post = {}", postDto);
+            redirectAttributes.addAttribute("postId", postId);
+            return "redirect:/post-detail/{postId}";
+        }
+
+        return "/";
+    }
+
+    @GetMapping("/post-edit/{postId}")
+    public String editForm(@PathVariable Long postId, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+
+        if (isPosted(postId, userId)) {
+            PostVo post = postService.getPost(postId);
+            model.addAttribute("post", post);
+            return "post-edit";
+        }
+
+        return "/";
+    }
+
+    @PostMapping("/post-detail/{postId}/delete")
+    public String deletePost(@PathVariable Long postId, HttpServletRequest request,
+                             RedirectAttributes redirectAttributes) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+
+        if (isPosted(postId, userId)) {
+            Long groupId = postService.getPost(postId).getGroupId();
+            redirectAttributes.addAttribute("groupId", groupId);
+            try {
+                postService.deletePost(postId);
+            } catch (Exception e) {
+                log.info("[POST] delete 오류 발생 = {}", e);
+            }
+            return "redirect:/posts/{groupId}";
+        }
+
+        return "/";
+    }
+
     @GetMapping("/post-detail/{postId}")
     public String postDetail(@PathVariable("postId") Long postId,
                              HttpServletRequest request, Model model) {
@@ -108,7 +169,7 @@ public class PostController {
     }
 
     @GetMapping("/post-detail/{postId}/files")
-    public List<FileVo> getFiles(@PathVariable("postId") Long postId) {
+    public @ResponseBody List<FileVo> getFiles(@PathVariable("postId") Long postId) {
         return fileService.getFileByPost(postId);
     }
 

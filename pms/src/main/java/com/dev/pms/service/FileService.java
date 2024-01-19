@@ -22,6 +22,10 @@ public class FileService {
         return fileMapper.getFileByPost(postId);
     }
 
+    public FileVo getFileById(Long fileId) {
+        return fileMapper.getFileById(fileId);
+    }
+
     public void insertFile(Long postId, List<FileDto> files) {
         if (CollectionUtils.isEmpty(files)) {
             return;
