@@ -14,8 +14,13 @@
     <div class="container">
         <div>
             <label for="post-title">제목</label>
-            <input type="text" id="post-content" name="post-content" class="form-control"
+            <input type="text" id="post-title" name="post-title" class="form-control"
                 value="${post.title}" readonly>
+        </div>
+        <div>
+            <label for="post-writer">작성자</label>
+            <input type="text" id="post-writer" name="post-content" class="form-control"
+                value="${post.userName}" readonly>
         </div>
         <div>
             <label for="post-date">등록일</label>

@@ -12,4 +12,5 @@ public class FileVo {
     private String saveName;
     private Long fileSize;
     private LocalDateTime uploadDate;
+    private Long postId;
 }

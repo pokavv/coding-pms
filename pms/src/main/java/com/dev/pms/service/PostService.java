@@ -15,7 +15,7 @@ import java.util.List;
 public class PostService {
 
     @Autowired
-    PostMapper postMapper;
+    private PostMapper postMapper;
 
     public List<PostVo> getPosts(Long groupId, PostSearchCond cond) {
         return postMapper.getPosts(groupId, cond);
@@ -31,5 +31,17 @@ public class PostService {
 
     public PostVo getPost(Long postId) {
         return postMapper.getPost(postId);
+    }
+
+    public void updatePost(Long postId, String title, String content) {
+        postMapper.updatePost(postId, title, content);
+    }
+
+    public void deletePost(Long postId) {
+        postMapper.deletePost(postId);
+    }
+
+    public Long getRecentPostId() {
+        return postMapper.getRecentPostId();
     }
 }

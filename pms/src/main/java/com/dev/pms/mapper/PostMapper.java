@@ -19,4 +19,10 @@ public interface PostMapper {
     void addPost(PostDto postDto);
 
     PostVo getPost(Long postId);
+
+    void updatePost(Long postId, String title, String content);
+
+    void deletePost(Long postId);
+
+    Long getRecentPostId();
 }

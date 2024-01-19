@@ -1,10 +1,10 @@
 package com.dev.pms.controller;
 
-import com.dev.pms.domain.PostDto;
-import com.dev.pms.domain.PostSearchCond;
-import com.dev.pms.domain.PostVo;
+import com.dev.pms.domain.*;
 import com.dev.pms.filter.SessionConst;
 import com.dev.pms.service.BelongService;
+import com.dev.pms.service.FileService;
+import com.dev.pms.service.FileUtils;
 import com.dev.pms.service.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -27,6 +27,8 @@ public class PostController {
 
     private final PostService postService;
     private final BelongService belongService;
+    private final FileUtils fileUtils;
+    private final FileService fileService;
 
     @GetMapping("/posts/{groupId}")
     public String getPosts(@PathVariable("groupId") Long groupId,
@@ -65,15 +67,23 @@ public class PostController {
     }
 
     @PostMapping("/add-post/{groupId}")
-    public String addPost(@PathVariable("groupId") Long groupId,
-                          PostDto postDto, HttpServletRequest request,
-                          RedirectAttributes redirectAttributes) {
+    public String addPost(@PathVariable("groupId") Long groupId, PostDto postDto,
+                          HttpServletRequest request, RedirectAttributes redirectAttributes) {
         if (isPermission(groupId, request)) {
             HttpSession session = request.getSession();
             Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
             postDto.setUserId(userId);
             postDto.setGroupId(groupId);
             postService.addPost(postDto);
+
+            Long recentPostId = postService.getRecentPostId();
+            List<FileDto> files = fileUtils.uploadFiles(postDto.getFiles());
+            try {
+                fileService.insertFile(recentPostId, files);
+            } catch (Exception e) {
+                postService.deletePost(recentPostId);
+            }
+
             log.info("addPost={}", postDto);
 
             redirectAttributes.addAttribute("groupId", groupId);
@@ -95,6 +105,11 @@ public class PostController {
             return "post-detail";
         }
         return "/";
+    }
+
+    @GetMapping("/post-detail/{postId}/files")
+    public List<FileVo> getFiles(@PathVariable("postId") Long postId) {
+        return fileService.getFileByPost(postId);
     }
 
     private Boolean isPosted(Long postId, Long userId) {
