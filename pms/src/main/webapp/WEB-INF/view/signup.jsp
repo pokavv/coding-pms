@@ -10,7 +10,7 @@
     <h2>회원가입</h2>
     <form action="/signup" method="post">
         <div>
-            <input type="text" name="name" placeholder="이름"/>
+            <input type="text" name="userName" placeholder="이름"/>
         </div>
         <div>
             <input type="text" name="email" placeholder="이메일"/>

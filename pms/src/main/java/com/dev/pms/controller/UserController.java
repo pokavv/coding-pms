@@ -79,7 +79,7 @@ public class UserController {
         Long userId = (Long) session.getAttribute("userId");
         UserVo userVo = userService.getUserById(userId);
         model.addAttribute("user", userVo);
-        return "update";
+        return "update-user";
     }
 
     @PostMapping("/update")
@@ -108,5 +108,27 @@ public class UserController {
             return "redirect:/";
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/my-info")
+    public String myInfo(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+        UserVo userVo = userService.getUserById(userId);
+        model.addAttribute("user", userVo);
+        log.info("user info = {}", userVo);
+
+        return "my-info";
+    }
+
+    @GetMapping("/change-password")
+    public String changePasswordForm(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+        UserVo userVo = userService.getUserById(userId);
+        model.addAttribute("user", userVo);
+        model.addAttribute("old-password", userVo.getPassword());
+
+        return "change-password";
     }
 }

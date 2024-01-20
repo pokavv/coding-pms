@@ -11,13 +11,10 @@
     <h2>회원정보수정</h2>
     <form action="/update" method="post" accept-charset="utf-8">
         <p>이름
-            <input type="text" name="name" value="${user.name}"/>
+            <input type="text" name="userName" value="${user.userName}"/>
         </p>
         <p>이메일
             <input type="text" name="email" value="${user.email}"/>
-        </p>
-        <p>비밀번호
-            <input type="password" name="password" value="${user.password}"/>
         </p>
         <p>전화번호
             <input type="text" name="phone" value="${user.phone}"/>
@@ -27,5 +24,9 @@
         </p>
         <button type="submit">저장</button>
     </form>
+
+    <div class="change-password">
+        <button type="button" onclick="location.href='/change-password'">비밀번호 변경</button>
+    </div>
 </body>
 </html>

@@ -31,6 +31,7 @@ public class UserService {
     }
 
     public void signup(UserVo userVo) {
+        log.info("userService.userVo={}", userVo);
         userMapper.insertUser(userVo);
     }
 

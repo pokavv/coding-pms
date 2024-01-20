@@ -34,9 +34,9 @@ public class DownloadController {
                                                  @PathVariable("fileId") Long fileId) throws MalformedURLException {
         FileVo fileById = fileService.getFileById(fileId);
         String saveName = fileById.getSaveName();
-        String today = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMdd")).toString();
+        String uploadDate = fileById.getUploadDate().format(DateTimeFormatter.ofPattern("yyMMdd")).toString();
 
-        UrlResource resource = new UrlResource("file:" + uploadPath + "/" + today + "/" + saveName);
+        UrlResource resource = new UrlResource("file:" + uploadPath + "/" + uploadDate + "/" + saveName);
 
         log.info("download fileById = {}", fileById);
 

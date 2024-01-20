@@ -8,7 +8,7 @@
         on g.group_id = b.group_id
         inner join user_table u
         on b.user_id = u.user_id
-        where b.user_id = 1
+        where b.user_id = #{userId}
         order by u.user_id
     </select>
 

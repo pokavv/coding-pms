@@ -17,12 +17,18 @@
                 <th>이름</th>
                 <th>이메일</th>
                 <th>전화번호</th>
+                <c:if test="${user.website != null}">
+                <th>웹사이트</th>
+                </c:if>
             </tr>
 
             <tr>
-                <td>유저1</td>
-                <td>유저@naver.com</td>
-                <td>01012341234</td>
+                <td>${user.userName}</td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
+                <c:if test="${user.website != null}">
+                <td>${user.website}</td>
+                </c:if>
             </tr>
         </table>
 
