@@ -46,4 +46,10 @@
         from user_table
         where email=#{email}
     </select>
+
+    <update id="changePassword">
+        update user_table
+        set password=#{password}
+        where user_id=#{userId}
+    </update>
 </mapper>

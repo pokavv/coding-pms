@@ -50,4 +50,8 @@ public class UserService {
     public int emailDuplicateCheck(UserVo userVo) {
         return userMapper.emailDuplicateCheck(userVo);
     }
+
+    public void changePassword(Long userId, String password) {
+        userMapper.changePassword(userId, password);
+    }
 }

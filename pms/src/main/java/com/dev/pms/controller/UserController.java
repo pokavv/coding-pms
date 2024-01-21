@@ -122,13 +122,34 @@ public class UserController {
     }
 
     @GetMapping("/change-password")
-    public String changePasswordForm(HttpServletRequest request, Model model) {
+    public String changePasswordForm(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
-        UserVo userVo = userService.getUserById(userId);
-        model.addAttribute("user", userVo);
-        model.addAttribute("old-password", userVo.getPassword());
+        if (userService.getUserById(userId) != null) {
+            return "change-password";
+        }
+        return "redirect:/login";
+    }
 
-        return "change-password";
+    @PostMapping("/change-password")
+    public String changePassword(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+        String password = userService.getUserById(userId).getPassword();
+
+        if (!request.getParameter("old_password").equals(password)) {
+            log.info("회원 비밀번호 변경 실패");
+            return "redirect:/change-password-error";
+        }
+
+        String newPassword = request.getParameter("new_password");
+        userService.changePassword(userId, newPassword);
+        log.info("회원 비밀번호 변경 완료");
+        return "redirect:/my-info";
+    }
+
+    @GetMapping("/change-password-error")
+    public String changePasswordError() {
+        return "change-password-error";
     }
 }

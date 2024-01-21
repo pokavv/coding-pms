@@ -2,6 +2,7 @@ package com.dev.pms.mapper;
 
 import com.dev.pms.domain.UserVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,4 +23,6 @@ public interface UserMapper {
     void deleteUser(Long id);
 
     Integer emailDuplicateCheck(UserVo userVo);
+
+    void changePassword(@Param("userId") Long userId, @Param("password") String password);
 }

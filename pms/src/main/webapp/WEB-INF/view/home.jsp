@@ -17,7 +17,9 @@
     <p>name: ${user.userName}</p>
     <p>email: ${user.email}</p>
     <p>phone: ${user.phone}</p>
+    <c:if test="${user.website != null}">
     <p>website: ${user.website}</p>
+    </c:if>
 
     <br>
     <button type="button" onclick="location.href='update'">정보수정</button>
