@@ -41,4 +41,30 @@
         and is_admitted=true
         and is_manager=true
     </select>
+
+    <update id="grantAuthorityTrue">
+        update belong_table
+        set is_admitted=true
+        where user_id=#{userId} and group_id=#{groupId}
+    </update>
+
+    <update id="grantAuthorityManager">
+        update belong_table
+        set is_manager=true
+        where user_id=#{userId} and group_id=#{groupId}
+    </update>
+
+    <select id="getUserByGroup" resultType="com.dev.pms.domain.UserVo">
+        select u.user_id, u.user_name, u.email, u.phone, u.website
+        from user_table as u
+        inner join belong_table as b
+        on u.user_id=b.belong_id
+        where b.group_id=#{groupId}
+    </select>
+
+    <delete id="deleteUserByGroup">
+        delete
+        from belong_table
+        where group_id=#{groupId} and user_id=#{userId}
+    </delete>
 </mapper>

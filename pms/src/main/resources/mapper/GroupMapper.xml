@@ -30,4 +30,24 @@
         from group_table
         where group_id=#{groupId}
     </select>
+
+    <update id="setGroupAimCompleted">
+        update group_table
+        set is_completed=true
+        where group_id=#{groupId}
+    </update>
+
+    <update id="setGroupRecruit">
+        update group_table
+        set is_recruit=#{isRecruit}
+        where group_id=#{groupId}
+    </update>
+
+    <update id="updateGroupInfo">
+        update group_table
+        set group_name=#{groupName},
+            group_description=#{groupDescription},
+            group_aim=#{groupAim}
+        where group_id=#{groupId}
+    </update>
 </mapper>
