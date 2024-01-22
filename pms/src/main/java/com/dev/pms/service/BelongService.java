@@ -1,14 +1,13 @@
 package com.dev.pms.service;
 
-import com.dev.pms.domain.BelongDto;
-import com.dev.pms.domain.PermissionVo;
-import com.dev.pms.domain.UserDto;
-import com.dev.pms.domain.UserVo;
+import com.dev.pms.domain.*;
 import com.dev.pms.mapper.BelongMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -52,5 +51,17 @@ public class BelongService {
 
     public void deleteUserByGroup(Long userId, Long groupId) {
         belongMapper.deleteUserByGroup(userId, groupId);
+    }
+
+    public List<GroupMemberVo> getGroupMember(Long groupId) {
+        return belongMapper.getGroupMember(groupId);
+    }
+
+    public List<GroupMemberVo> getGroupManager(Long groupId) {
+        return belongMapper.getGroupManager(groupId);
+    }
+
+    public List<GroupMemberVo> getGroupJunior(Long groupId) {
+        return belongMapper.getGroupJunior(groupId);
     }
 }

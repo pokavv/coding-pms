@@ -67,4 +67,28 @@
         from belong_table
         where group_id=#{groupId} and user_id=#{userId}
     </delete>
+
+    <select id="getGroupMember" resultType="com.dev.pms.domain.GroupMemberVo">
+        select b.belong_id, b.is_admitted, b.is_manager, b.user_id, b.group_id, u.user_name, u.email, u.website
+        from belong_table as b
+        inner join user_table as u
+        on b.user_id = u.user_id
+        where b.group_id=#{groupId} and b.is_admitted=true
+    </select>
+
+    <select id="getGroupManager" resultType="com.dev.pms.domain.GroupMemberVo">
+        select b.belong_id, b.is_admitted, b.is_manager, b.user_id, b.group_id, u.user_name, u.email, u.website
+        from belong_table as b
+        inner join user_table as u
+        on b.user_id = u.user_id
+        where b.group_id=#{groupId} and b.is_manager=true
+    </select>
+
+    <select id="getGroupJunior" resultType="com.dev.pms.domain.GroupMemberVo">
+        select b.belong_id, b.is_admitted, b.is_manager, b.user_id, b.group_id, u.user_name, u.email, u.website
+        from belong_table as b
+        inner join user_table as u
+        on b.user_id = u.user_id
+        where b.group_id=#{groupId} and b.is_admitted=false
+    </select>
 </mapper>

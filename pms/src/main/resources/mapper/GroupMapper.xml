@@ -50,4 +50,12 @@
             group_aim=#{groupAim}
         where group_id=#{groupId}
     </update>
+
+    <select id="checkAuthManagerBySessionId" resultType="Boolean">
+        select b.is_manager
+        from group_table as g
+        inner join belong_table as b
+        on g.group_id=b.group_id
+        where g.group_id=#{groupId} and b.user_id=#{userId}
+    </select>
 </mapper>

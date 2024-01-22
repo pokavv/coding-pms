@@ -52,5 +52,9 @@
         <div>
             <button type="button" class="group-withdrawal-btn" onclick="location.href='/group-withdrawal'">그룹탈퇴</button>
         </div>
+        <c:if test="${isManager == true}">
+            <button type="button" class="admin-page-btn" onclick="location.href='/my-group/${groupId}/admin'">관리자 페이지</button>
+        </c:if>
+    </div>
 </body>
 </html>

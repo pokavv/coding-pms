@@ -67,5 +67,9 @@
             </c:choose>
         </table>
     </div>
+
+    <div class="container">
+        <button type="button" onclick="location.href='/create-group'">그룹생성</button>
+    </div>
 </body>
 </html>

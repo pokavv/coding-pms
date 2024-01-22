@@ -2,7 +2,9 @@ package com.dev.pms.controller;
 
 import com.dev.pms.domain.GroupSearchCond;
 import com.dev.pms.domain.GroupVo;
+import com.dev.pms.domain.PermissionVo;
 import com.dev.pms.filter.SessionConst;
+import com.dev.pms.service.BelongService;
 import com.dev.pms.service.GroupService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -73,9 +75,17 @@ public class GroupController {
         model.addAttribute("userId", userId);
         model.addAttribute("userName", userName);
 
+        Boolean isManager = groupService.checkAuthManagerBySessionId(groupId, userId);
+        model.addAttribute("isManager", isManager);
+
         GroupVo groupById = groupService.getGroupById(groupId);
         model.addAttribute("group", groupById);
 
         return "my-group-detail";
+    }
+
+    @GetMapping("/create-group")
+    public String createGroupForm() {
+        return "create-group";
     }
 }

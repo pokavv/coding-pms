@@ -27,4 +27,8 @@ public class GroupService {
     public GroupVo getGroupById(Long groupId) {
         return groupMapper.getGroupById(groupId);
     }
+
+    public Boolean checkAuthManagerBySessionId(Long groupId, Long userId) {
+        return groupMapper.checkAuthManagerBySessionId(groupId, userId);
+    }
 }

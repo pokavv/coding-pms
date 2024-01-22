@@ -13,7 +13,7 @@
             <span class="profile-img">
                 <img src="/images/logo.png" style="height: 200px; width: 200px;" alt="에러">
             </span>
-            <h1 id="name">Myname</h1>
+            <h1 id="name">반갑습니다 ${user.userName} 님!</h1>
         </div>
         <nav id="nav">
             <ul class="main-menu">
@@ -23,6 +23,12 @@
                 <li><a href="/my-info" class="my-info">내 정보</a></li>
             </ul>
         </nav>
+        <div>
+            <form action="/logout" method="post">
+                <button type="submit">로그아웃</button>
+            </form>
+        </div>
+        <br>
     </header>
 </section>
 </body>

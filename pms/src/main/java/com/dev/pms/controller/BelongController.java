@@ -1,9 +1,11 @@
 package com.dev.pms.controller;
 
+import com.dev.pms.domain.GroupMemberVo;
 import com.dev.pms.domain.PermissionVo;
 import com.dev.pms.domain.UserVo;
 import com.dev.pms.filter.SessionConst;
 import com.dev.pms.service.BelongService;
+import com.dev.pms.service.GroupService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +16,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class BelongController {
 
+    private final GroupService groupService;
     private final BelongService belongService;
 
     @GetMapping("/group-join/{groupId}/{userId}")
@@ -66,12 +71,23 @@ public class BelongController {
             log.info("매니저 권한이 없는 유저의 접근 userId = {}", userId);
             return "redirect:/my-group/{groupId}";
         }
-        UserVo userByGroup = belongService.getUserByGroup(groupId);
-        model.addAttribute("users", userByGroup);
+
+        String groupName = groupService.getGroupById(groupId).getGroupName();
+        List<GroupMemberVo> groupMember = belongService.getGroupMember(groupId);
+        List<GroupMemberVo> groupManager = belongService.getGroupManager(groupId);
+        List<GroupMemberVo> groupJunior = belongService.getGroupJunior(groupId);
+
+        model.addAttribute("groupName", groupName);
+        model.addAttribute("member", groupMember);
+        model.addAttribute("manager", groupManager);
+        model.addAttribute("junior", groupJunior);
+
+        log.info("어드민 페이지 접근");
+
         return "group-admin";
     }
 
-    @PostMapping("/my-group/{groupId}/admin/{userId}/grant-auth-true")
+    @GetMapping("/my-group/{groupId}/admin/{userId}/grant-auth-true")
     public String grantAuthTrue(@PathVariable("groupId") Long groupId, @PathVariable("userId") Long userId,
                                 HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -86,7 +102,7 @@ public class BelongController {
         return "redirect:/my-group/{groupId}/admin";
     }
 
-    @PostMapping("/my-group/{groupId}/admin/{userId}/grant-auth-manager")
+    @GetMapping("/my-group/{groupId}/admin/{userId}/grant-auth-manager")
     public String grantAuthManager(@PathVariable("groupId") Long groupId, @PathVariable("userId") Long userId,
                                    HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -101,7 +117,7 @@ public class BelongController {
         return "redirect:/my-group/{groupId}/admin";
     }
 
-    @PostMapping("/my-group/{groupId}/admin/{userId}/delete-user")
+    @GetMapping("/my-group/{groupId}/admin/{userId}/delete-user")
     public String deleteUserByGroup(@PathVariable("groupId") Long groupId, @PathVariable("userId") Long userId,
                                     HttpServletRequest request) {
         HttpSession session = request.getSession();

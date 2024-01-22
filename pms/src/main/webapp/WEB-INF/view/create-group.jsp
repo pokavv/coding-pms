@@ -4,22 +4,27 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>로그인</title>
+    <title>그룹생성</title>
 </head>
 <body>
-    <form action="" method="post">
+    <h2>그룹생성</h2>
+    <form action="/signup" method="post">
         <div>
-            <img src="/images/logo.png" class="img-thumbnail" style="height: 200px; width: 200px;" alt="이 글이 보이면 필터 에러">
-            <h2>로그인</h2>
+            <input type="text" name="userName" placeholder="이름"/>
         </div>
         <div>
             <input type="text" name="email" placeholder="이메일"/>
         </div>
         <div>
             <input type="password" name="password" placeholder="비밀번호"/>
+        </div>
         <div>
-        <button type="submit">로그인</button>
-        <button type="button" onclick="location.href='signup'">회원가입</button>
+            <input type="text" name="phone" placeholder="전화번호"/>
+        </div>
+        <div>
+            <input type="text" name="website" placeholder="웹사이트"/>
+        </div>
+        <button type="submit">그룹생성</button>
     </form>
 </body>
 </html>

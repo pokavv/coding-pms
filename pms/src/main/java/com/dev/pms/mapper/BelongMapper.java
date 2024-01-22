@@ -1,10 +1,13 @@
 package com.dev.pms.mapper;
 
 import com.dev.pms.domain.BelongDto;
+import com.dev.pms.domain.GroupMemberVo;
 import com.dev.pms.domain.PermissionVo;
 import com.dev.pms.domain.UserVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface BelongMapper {
@@ -26,4 +29,10 @@ public interface BelongMapper {
     UserVo getUserByGroup(Long groupId);
 
     void deleteUserByGroup(@Param("userId") Long userId, @Param("groupId") Long groupId);
+
+    List<GroupMemberVo> getGroupMember(Long groupId);
+
+    List<GroupMemberVo> getGroupManager(Long groupId);
+
+    List<GroupMemberVo> getGroupJunior(Long groupId);
 }
