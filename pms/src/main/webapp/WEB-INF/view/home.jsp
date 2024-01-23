@@ -6,11 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>환영합니다!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <jsp:include page="header.jsp"></jsp:include>
 
-    <hr class="my-4">
     <h2>${user.userName}님의 회원정보</h2>
     <p>name: ${user.userName}</p>
     <p>email: ${user.email}</p>

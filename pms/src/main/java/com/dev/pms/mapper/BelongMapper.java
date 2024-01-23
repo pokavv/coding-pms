@@ -35,4 +35,6 @@ public interface BelongMapper {
     List<GroupMemberVo> getGroupManager(Long groupId);
 
     List<GroupMemberVo> getGroupJunior(Long groupId);
+
+    void addBelongCreateUser(@Param("userId") Long userId, @Param("groupId") Long groupId);
 }

@@ -31,4 +31,12 @@ public class GroupService {
     public Boolean checkAuthManagerBySessionId(Long groupId, Long userId) {
         return groupMapper.checkAuthManagerBySessionId(groupId, userId);
     }
+
+    public void createGroup(String groupName, String groupDescription, String groupAim) {
+        groupMapper.createGroup(groupName, groupDescription, groupAim);
+    }
+
+    public Long getRecentAddGroupId() {
+        return groupMapper.getRecentAddGroupId();
+    }
 }

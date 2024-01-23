@@ -5,6 +5,7 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"href="css/bootstrap.min.css" rel="stylesheet">
     <title>정보수정</title>
 </head>
 <body>

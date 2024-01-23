@@ -22,6 +22,7 @@ import java.util.List;
 public class GroupController {
 
     private final GroupService groupService;
+    private final BelongService belongService;
 
     @GetMapping("/userGroup-list")
     public @ResponseBody List<GroupVo> getGroupByUser(HttpServletRequest request) {
@@ -87,5 +88,20 @@ public class GroupController {
     @GetMapping("/create-group")
     public String createGroupForm() {
         return "create-group";
+    }
+
+    @PostMapping("/create-group")
+    public String createGroup(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionConst.LOGIN_USER);
+
+        String groupName = request.getParameter("groupName");
+        String groupDescription = request.getParameter("groupDescription");
+        String groupAim = request.getParameter("groupAim");
+
+        groupService.createGroup(groupName, groupDescription, groupAim);
+        Long groupId = groupService.getRecentAddGroupId();
+        belongService.addBelongCreateUser(userId, groupId);
+        return "redirect:/group-list";
     }
 }

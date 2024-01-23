@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"href="css/bootstrap.min.css" rel="stylesheet">
     <title>글작성</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
                 <input type="text" name="title" placeholder="제목"/>
             </div>
             <div>
-                <input type="textarea" name="content" placeholder="내용"/>
+                <input type="textarea" name="content" class="form-control" rows="8" cols="85" placeholder="내용"/>
             </div>
             <div>
                 <th>첨부파일</th>

@@ -58,4 +58,16 @@
         on g.group_id=b.group_id
         where g.group_id=#{groupId} and b.user_id=#{userId}
     </select>
+
+    <insert id="createGroup" useGeneratedKeys="true">
+        insert into group_table
+        (group_name, group_description, group_aim, created_date, is_recruit, is_completed)
+        values
+        (#{groupName}, #{groupDescription}, #{groupAim}, current_timestamp, true, false)
+    </insert>
+
+    <select id="getRecentAddGroupId" resultType="long">
+        select max(group_id)
+        from group_table
+    </select>
 </mapper>

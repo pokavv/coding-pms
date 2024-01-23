@@ -64,4 +64,8 @@ public class BelongService {
     public List<GroupMemberVo> getGroupJunior(Long groupId) {
         return belongMapper.getGroupJunior(groupId);
     }
+
+    public void addBelongCreateUser(Long userId, Long groupId) {
+        belongMapper.addBelongCreateUser(userId, groupId);
+    }
 }

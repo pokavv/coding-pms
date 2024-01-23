@@ -4,16 +4,22 @@
 <html lang="ko">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <title>헤더</title>
+    <style>
+        div, h3, #nav, ul, li {
+            display: inline-block
+        }
+    </style>
 </head>
 <body>
 <section>
     <header id="header">
         <div id="profile">
-            <span class="profile-img">
+            <!-- <span class="profile-img">
                 <img src="/images/logo.png" style="height: 200px; width: 200px;" alt="에러">
-            </span>
-            <h1 id="name">반갑습니다 ${user.userName} 님!</h1>
+            </span> -->
+            <h3>현재 로그인: ${sessionScope.username}</h3>
         </div>
         <nav id="nav">
             <ul class="main-menu">
@@ -28,7 +34,7 @@
                 <button type="submit">로그아웃</button>
             </form>
         </div>
-        <br>
+        <hr class="my-4">
     </header>
 </section>
 </body>

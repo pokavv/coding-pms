@@ -91,4 +91,11 @@
         on b.user_id = u.user_id
         where b.group_id=#{groupId} and b.is_admitted=false
     </select>
+
+    <insert id="addBelongCreateUser" useGeneratedKeys="true" parameterType="long">
+        insert into belong_table
+        (user_id, group_id, is_admitted, is_manager)
+        values
+        (#{userId}, #{groupId}, true, true)
+    </insert>
 </mapper>

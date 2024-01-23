@@ -17,4 +17,10 @@ public interface GroupMapper {
     GroupVo getGroupById(Long groupId);
 
     Boolean checkAuthManagerBySessionId(@Param("groupId") Long groupId, @Param("userId") Long userId);
+
+    void createGroup(@Param("groupName") String groupName,
+                     @Param("groupDescription") String groupDescription,
+                     @Param("groupAim") String groupAim);
+
+    Long getRecentAddGroupId();
 }
