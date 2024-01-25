@@ -9,7 +9,7 @@ Springboot 로 제작한 그룹별 프로젝트 관리 시스템 만들기
 ## ⚙️ 개발 환경
 - **Language** : 'Java 17'
 - **Farmework** : 'Springboot 3.2.1'
-- **Database** : 'H2 database 2.2.224'
+- **Database** : 'AWS RDS (PostgreSQL 15.4)', 'H2 database 2.2.224'
 - **ORM** : 'MyBatis 3.0.3'
 - 'JSP 3.0.1'
 - 'lombok'
@@ -43,3 +43,5 @@ Springboot 로 제작한 그룹별 프로젝트 관리 시스템 만들기
 - join 을 통해 DB내 데이터를 효율적으로 가져오기
 - 각 기능을 최대한 독립적으로 구현
 - jquery / ajax 정확히 익히기 
+- AWS RDS 를 이용한 DB 관리
+- AWS Instance 를 이용해서 프로젝트 최종 배포하기
