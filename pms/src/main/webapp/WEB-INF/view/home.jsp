@@ -58,6 +58,7 @@
     <hr class="my-4">
     <h2>참가 그룹</h2>
     <div id="group_list" class="group_list">
+
     </div>
     <div>
         <button type="button" onclick="location.href='/my-group'">더보기</button>
