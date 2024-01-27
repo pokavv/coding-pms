@@ -7,13 +7,13 @@ Springboot 로 제작한 그룹별 프로젝트 관리 시스템 만들기
 23.12.31 ~ 24.01.23
 
 ## ⚙️ 개발 환경
-- **Language** : 'Java 17'
-- **Farmework** : 'Springboot 3.2.1'
-- **Database** : 'AWS RDS (PostgreSQL 15.4)', 'H2 database 2.2.224'
-- **ORM** : 'MyBatis 3.0.3'
-- **Server** : 'AWS EC2'
-- 'JSP 3.0.1'
-- 'lombok'
+- **Language** : Java 17
+- **Farmework** : Springboot 3.2.1
+- **Database** : AWS RDS (PostgreSQL 15.4), H2 database 2.2.224
+- **ORM** : MyBatis 3.0.3
+- **Server** : AWS EC2
+- JSP 3.0.1
+- lombok
 
 ## 🔍 프로젝트 흐름
 ![boardchat 프로젝트 다이어그램](./coding-pms-diagram.png)
